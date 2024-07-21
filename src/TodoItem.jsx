@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-function TodoItem({ todo, index, deleteTodo, editCurrentTodo }) {
+function TodoItem({ todo, index, deleteTodo, editCurrentTodo, changeOrder }) {
     const [editStarted, setEditStarted] = useState(false)
     const [newText, setNewText] = useState("")
 
@@ -12,28 +12,38 @@ function TodoItem({ todo, index, deleteTodo, editCurrentTodo }) {
     const handleSave = () => {
         if (newText) {
             editCurrentTodo(index, newText)
-            setEditStarted(false)
             setNewText("")
-        } else {
-            setEditStarted(false)
         }
+        setEditStarted(false)
     }
 
     const handleChangeTodo = (event) => {
         setNewText(event.target.value)
     }
 
-    const handleDelete = (todoIndex) => {
-        deleteTodo(todoIndex)
+    const handleDelete = () => {
+        deleteTodo(index)
         setEditStarted(false)
+    }
+
+    const handleUp = () => {
+        changeOrder(index, "up")
+    }
+
+    const handleDown = () => {
+        changeOrder(index, "down")
     }
 
     return (
         <tr key={index}>
-            <td>{index}</td>
+            <td>
+                <button onClick={handleUp} style={{marginRight: "1px"}}>↑</button>
+                <button onClick={handleDown}>↓</button>
+            </td>
+            <td>{index+1}</td>
             <td>{todo}</td>
             <td>
-                <button onClick={() => handleDelete(index)}>Löschen</button>
+                <button onClick={handleDelete}>Löschen</button>
             </td>
             <td>
                 {editStarted ?
