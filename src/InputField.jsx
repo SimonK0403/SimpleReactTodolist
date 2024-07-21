@@ -15,10 +15,10 @@ function InputField({ addTodo }) {
     }
 
     return (
-        <>
-            <input type="text" onChange={handleChange} value={newTodo} />
+        <div>
+            <input type="text" onChange={handleChange} value={newTodo} style={{marginRight: "5px"}} />
             <button onClick={() => handleAddTodo(newTodo)}>Hinzufügen</button>
-        </>
+        </div>
     )
 }
 

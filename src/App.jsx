@@ -23,10 +23,22 @@ function App() {
 
     return (
         <>
-            <InputField addTodo={addTodo}/>
-            {todos.map((todo, index) => (
-                <TodoItem todo={todo} index={index} deleteTodo={deleteTodo} editCurrentTodo={editCurrentTodo}/>
-            ))}
+            <InputField addTodo={addTodo} />
+            <table>
+                <thead>
+                    <tr>
+                        <th>Reihenfolge</th>
+                        <th>Aufgabe</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {todos.map((todo, index) => (
+                        <TodoItem todo={todo} index={index} deleteTodo={deleteTodo} editCurrentTodo={editCurrentTodo} />
+                    ))}
+                </tbody>
+            </table>
         </>
     )
 }

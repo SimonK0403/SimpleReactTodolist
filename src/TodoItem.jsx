@@ -10,7 +10,7 @@ function TodoItem({ todo, index, deleteTodo, editCurrentTodo }) {
     }
 
     const handleSave = () => {
-        if(newText) {
+        if (newText) {
             editCurrentTodo(index, newText)
             setEditStarted(false)
             setNewText("")
@@ -23,23 +23,32 @@ function TodoItem({ todo, index, deleteTodo, editCurrentTodo }) {
         setNewText(event.target.value)
     }
 
-    return (
-        <div style={{ display: "flex" }}>
-            <div key={index}>{index}: {todo}</div>
-            <button onClick={() => deleteTodo(index)}>Löschen</button>
-            {editStarted ?
-                (
-                    <>
-                        <input onChange={handleChangeTodo} value={newText} />
-                        <button onClick={handleSave}>Speichern</button>
-                    </>
-                ) :
-                (
-                    <button onClick={handleStartEdit}>Bearbeiten</button>
-                )
-            }
+    const handleDelete = (todoIndex) => {
+        deleteTodo(todoIndex)
+        setEditStarted(false)
+    }
 
-        </div>
+    return (
+        <tr key={index}>
+            <td>{index}</td>
+            <td>{todo}</td>
+            <td>
+                <button onClick={() => handleDelete(index)}>Löschen</button>
+            </td>
+            <td>
+                {editStarted ?
+                    (
+                        <>
+                            <input onChange={handleChangeTodo} value={newText} />
+                            <button onClick={handleSave}>Speichern</button>
+                        </>
+                    ) :
+                    (
+                        <button onClick={handleStartEdit}>Bearbeiten</button>
+                    )
+                }
+            </td>
+        </tr>
     )
 }
 
